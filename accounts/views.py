@@ -25,7 +25,7 @@ def registerPage(request):
 
 def logoutn(request):
     logout(request)
-    return redirect('home')
+    return redirect('article')
 	
 
 def loginPage(request):
@@ -36,7 +36,7 @@ def loginPage(request):
             
 		if user is not None:
 			login(request, user)
-			return redirect('home')
+			return redirect('article')
 		else:
 			messages.info(request, 'Username  is incorrect or does not exists')
 
@@ -45,8 +45,6 @@ def loginPage(request):
 
 
 
-def index(request):
-	return render(request,'index.html')
 
 
 
