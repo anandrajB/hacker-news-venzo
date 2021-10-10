@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from accounts.views import aboutpage , loginPage , registerPage ,  logoutn
-from articles.views import index
+from articles.views import index , addpost , detail
 
 
 urlpatterns = [
@@ -26,4 +26,6 @@ urlpatterns = [
     path('logout/',logoutn , name="logout"),
     path('about/',aboutpage,name='about'),
     path('register/',registerPage , name="register"),
+    path('add/',addpost,name="addpost"),
+    path('article/<slug:slug>/', detail,name = "detail"),
 ]

@@ -12,12 +12,8 @@
 </head>
 
 <body>
-    <div class="container" id="msg">
-        {% if user.is_authenticated %}
-            <p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>
-        {% endif %}
-    </div>
     
+
     <!-- navbar l -->
     
     <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
@@ -27,8 +23,8 @@
             <div
                 class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" >Home</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="about">About us</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'article' %}">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'about' %}">About us</a></li>
                     {% if not user.is_authenticated %}
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="register">Register</a></li>
@@ -53,43 +49,27 @@
         </div>
     </header>
 
-<!-- container for article postting-->
 
     <div class="container">
-        {% if articles %}
-            {% for article in articles %}
-        <div class="row">
-            <div class="col-md-10 col-lg-100">
-                <div class="post-preview">
-                    <a href="{% url 'detail' article.slug %}">
-                        <h2 class="post-title"> {{article.title}} </h2>
-                        <h3 class="post-subtitle"> {{article.content|safe|truncatewords:50}} </h3>
-                    </a>
-                    <p class="post-meta">By author : {{article.author.username}}</p>
-                    <p class="post-meta">{{article.created_date}}</p>
-                </div>
-            {% endfor %}
-                <hr>
-        {% endif %}
-            </div>
-        </div>
-    </div>
-    <!-- end for container each posts -->
 
     
+    <div class="col-lg-8">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src= "{% static 'js/script.min.js' %}"></script>
+      <!-- Title -->
+      <h3 class="mt-4">{{articles.title}}</h3>
+
+      <!-- Author -->
+      <p class="lead">{{articles.author.username}}</p>
+
+     
+
+      <!-- Date/Time -->
+      <p>{{articles.created_date}}</p>
+
+      
+      <p class="lead">{{articles.content|safe}}</p>
+
+     
+
 </body>
-
-
 </html>
-
-<script>
-    setTimeout(function(){
-        if ($('#msg').length > 0) {
-            $('#msg').remove();
-        }
-    }, 1000)   //1 seconfs 
-</script>
